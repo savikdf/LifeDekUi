@@ -1,0 +1,11 @@
+<header class="header">
+  <h1>My Cards</h1>
+  <input
+    class="new-card"
+    placeholder="New Card Name"
+    autofocus
+    [value]="cardName"
+    (keyup)="changeNewCardName($event)"
+    (keyup.enter)="addCard()"
+  />
+</header>

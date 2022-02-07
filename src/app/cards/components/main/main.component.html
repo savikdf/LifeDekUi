@@ -1,0 +1,8 @@
+<!-- Cards: {{visibleCards$ | async | json}} -->
+
+<ul class="card-list">
+  <app-cards-card
+    *ngFor="let card of visibleCards$ | async"
+    [card] = "card">
+  </app-cards-card>
+</ul>
