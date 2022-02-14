@@ -1,8 +1,18 @@
 <!-- Cards: {{visibleCards$ | async | json}} -->
+<section class="main" [ngClass]="{hidden : noCardsClass$ | async}">
+  <input
+    id="toggle-all"
+    class="toggle-all"
+    type="checkbox"
+    [checked]="isAllCardsSelected$ | async"
+    (change)="toggleAllCards($event)"
+  />
+  <label for="toggle-all">Mark All As Completed</label>
 
-<ul class="card-list">
-  <app-cards-card
-    *ngFor="let card of visibleCards$ | async"
-    [card] = "card">
-  </app-cards-card>
-</ul>
+  <ul class="card-list">
+    <app-cards-card
+      *ngFor="let card of visibleCards$ | async"
+      [card] = "card">
+    </app-cards-card>
+  </ul>
+</section>

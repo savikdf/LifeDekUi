@@ -19,4 +19,21 @@ export class CardsService {
     const updatedCards = [...this.cards$.getValue(), newCard];
     this.cards$.next(updatedCards);
   }
+
+  changeFilter(filter : FilterEnum) : void{
+    if(filter === this.filter$.value){
+      return
+    }
+    this.filter$.next(filter);
+  }
+
+  toggleAllCompleted(isCompleted : boolean) : void{
+    const updatedCards = this.cards$.getValue().map(card => {
+      return{
+        ...card,
+        isCompleted : isCompleted
+      }
+    });
+    this.cards$.next(updatedCards);
+  }
 }

@@ -1,0 +1,18 @@
+<footer class="footer" [ngClass]="{ hidden: noCardsClass$ | async }">
+  <span class="card-count">
+    <strong>{{activeCount$ | async}} {{activeCountLabel$ | async}}</strong>
+  </span>
+
+  <ul class="filters">
+    <li>
+      <a
+        href="/"
+        [ngClass]="{selected : true}"
+        (click)="changeFilter($event, filterEnum)"
+      >
+        All
+      </a>
+    </li>
+  </ul>
+
+</footer>

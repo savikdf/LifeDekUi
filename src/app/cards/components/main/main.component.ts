@@ -11,27 +11,39 @@ import { FilterEnum } from '../../types/filter.enum';
 })
 export class MainComponent {
   visibleCards$: Observable<CardInterface[]>;
+  noCardsClass$: Observable<boolean>;
+  isAllCardsSelected$: Observable<boolean>;
 
-  constructor(private cardService: CardsService){
+  constructor(private cardService: CardsService) {
+    this.isAllCardsSelected$ = this.cardService.cards$.pipe(
+      map((cards) => cards.every((card) => card.isCompleted))
+    );
 
+    //hiding main component if no cards exist
+    this.noCardsClass$ = this.cardService.cards$.pipe(
+      map((cards) => cards.length === 0)
+    );
+
+    //filtering cards based on filter enum
     this.visibleCards$ = combineLatest(
       this.cardService.cards$,
       this.cardService.filter$
     ).pipe(
-      map(([cards, filter]: [CardInterface[], FilterEnum])=>{
-        //filtering cards based on filter enum
+      map(([cards, filter]: [CardInterface[], FilterEnum]) => {
         //console.log('combine', cards, filter);
-        if(filter === FilterEnum.active){
-          return cards.filter(card => !card.isCompleted)
-        }else if(filter == FilterEnum.completed){
-          return cards.filter(card => card.isCompleted)
+        if (filter === FilterEnum.active) {
+          return cards.filter((card) => !card.isCompleted);
+        } else if (filter == FilterEnum.completed) {
+          return cards.filter((card) => card.isCompleted);
         }
         return cards;
       })
     );
-
   }
 
-
+  toggleAllCards(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.cardService.toggleAllCompleted(target.checked);
+  }
 
 }

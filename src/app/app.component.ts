@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  get appTitle(){
-    return "LifeDek App";
+  get title(){
+    return "LifeDek";
   }
 
 }

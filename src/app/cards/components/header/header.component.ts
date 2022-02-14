@@ -22,6 +22,10 @@ export class HeaderComponent {
   }
 
   addCard(): void {
+    if(this.cardName === ''){
+      return;
+    }
+
     // console.log(`Adding new Card: "${this.cardName}"`);
     this.cardService.addCard(this.cardName);
     this.cardName = ``; //reset input string
