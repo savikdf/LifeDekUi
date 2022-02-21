@@ -12,7 +12,9 @@
   <ul class="card-list">
     <app-cards-card
       *ngFor="let card of visibleCards$ | async"
-      [card] = "card">
+      [card] = "card"
+      [isEditing]="editingId === card.id"
+      (setEditingId)="setEditingId($event)">
     </app-cards-card>
   </ul>
 </section>

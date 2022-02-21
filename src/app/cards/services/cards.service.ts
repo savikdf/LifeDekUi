@@ -36,4 +36,35 @@ export class CardsService {
     });
     this.cards$.next(updatedCards);
   }
+
+  //#region Card Update Methods
+
+    updateCard(id : string, name : string):void{
+      const updatedCards = this.cards$.getValue().map(card => {
+        if(card.id !== id){
+          return card;
+        }
+        return {...card, name : name};
+      });
+      this.cards$.next(updatedCards);
+    }
+
+    toggleCardCompleted(id : string) : void{
+      const updatedCards = this.cards$.getValue().map(card => {
+        if(card.id === id){
+          return {...card, isCompleted : !card.isCompleted};
+        }
+        return card;
+      });
+      this.cards$.next(updatedCards);
+    }
+
+    removeCard(id : string):void{
+      const updatedCards = this.cards$.getValue().filter(card => card.id !== id);
+      this.cards$.next(updatedCards);
+    }
+
+  //#endregion
+
+
 }

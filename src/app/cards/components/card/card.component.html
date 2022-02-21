@@ -1,4 +1,23 @@
-<li>
-  {{cardProps.name}}
+<li [ngClass]="{editing : isEditingProps}">
+  <div class="view">
+    <input
+      class="toggle"
+      type="checkbox"
+      [checked]="cardProps.isCompleted"
+      (click)="toggleCompleted()"
+    />
+    <label (dblclick)="setCardEditMode()">
+      {{cardProps.name}}
+    </label>
+    <button class="destroy" (click)="removeCard()"></button>
+  </div>
+  <ng-container *ngIf="isEditingProps">
+    <input
+      class="edit"
+      #textInput
+      [value]="editingText"
+      (keyup)="changeName($event)"
+      (keyup.enter)="updateCard()"
+    />
+  </ng-container>
 </li>
-<!-- benifeet -->

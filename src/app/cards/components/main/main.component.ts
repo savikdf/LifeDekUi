@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, combineLatestAll, combineLatestWith, map, Observable } from 'rxjs';
 import { CardsService } from '../../services/cards.service';
 import { CardInterface } from '../../types/card.interface';
 import { FilterEnum } from '../../types/filter.enum';
@@ -13,6 +13,7 @@ export class MainComponent {
   visibleCards$: Observable<CardInterface[]>;
   noCardsClass$: Observable<boolean>;
   isAllCardsSelected$: Observable<boolean>;
+  editingId: string | null = null;
 
   constructor(private cardService: CardsService) {
     this.isAllCardsSelected$ = this.cardService.cards$.pipe(
@@ -30,13 +31,21 @@ export class MainComponent {
       this.cardService.filter$
     ).pipe(
       map(([cards, filter]: [CardInterface[], FilterEnum]) => {
-        //console.log('combine', cards, filter);
+        let result: CardInterface[]
+
+        //filtering logic
         if (filter === FilterEnum.active) {
-          return cards.filter((card) => !card.isCompleted);
+          result = cards.filter((card) => !card.isCompleted);
         } else if (filter == FilterEnum.completed) {
-          return cards.filter((card) => card.isCompleted);
+          result = cards.filter((card) => card.isCompleted);
+        }else{
+          result = cards;
         }
-        return cards;
+
+        //sorted by completed state, then by create date
+        result.sort((a,b)=> a.createDate > b.createDate ? 1 : -1);
+
+        return result;
       })
     );
   }
@@ -44,6 +53,10 @@ export class MainComponent {
   toggleAllCards(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.cardService.toggleAllCompleted(target.checked);
+  }
+
+  setEditingId(editingId : string | null): void{
+    this.editingId = editingId;
   }
 
 }

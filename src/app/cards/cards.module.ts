@@ -9,6 +9,7 @@ import { FooterComponent } from 'src/app/cards/components/footer/footer.componen
 import { CardComponent } from 'src/app/cards/components/card/card.component';
 //services
 import { CardsService } from 'src/app/cards/services/cards.service';
+import { EnumToArrayPipe } from '../shared/pipes/enumToArray.pipe';
 
 const routes: Routes = [
   {
@@ -23,7 +24,9 @@ const routes: Routes = [
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    CardComponent
+    CardComponent,
+    //shared pipes
+    EnumToArrayPipe
   ],
   imports: [
     CommonModule,

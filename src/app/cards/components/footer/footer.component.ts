@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { map, Observable, observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { filter, map, Observable, observable } from 'rxjs';
 import { CardsService } from '../../services/cards.service';
 import { FilterEnum } from '../../types/filter.enum';
 
@@ -12,9 +13,19 @@ export class FooterComponent{
   noCardsClass$: Observable<boolean>;
   activeCount$: Observable<number>;
   activeCountLabel$ : Observable<string>;
-  filterEnum : FilterEnum;
+  activeFilter$: Observable<FilterEnum>;
+
+  //used to expose enum values to template
+  public get FilterEnum(){
+    return FilterEnum;
+  }
 
   constructor(private cardService: CardsService) {
+    //active filter
+    this.activeFilter$ = this.cardService.filter$.pipe(
+      map((filter) => filter)
+    );
+
     //hiding main component if no cards exist
     this.noCardsClass$ = this.cardService.cards$.pipe(
       map((cards) => cards.length === 0)
@@ -35,6 +46,5 @@ export class FooterComponent{
     event.preventDefault();
     this.cardService.changeFilter(filter);
   }
-
 
 }
