@@ -9,24 +9,21 @@ import { FooterComponent } from 'src/app/cards/components/footer/footer.componen
 import { CardComponent } from 'src/app/cards/components/card/card.component';
 //services
 import { CardsService } from 'src/app/cards/services/cards.service';
-import { EnumToArrayPipe } from '../shared/pipes/enumToArray.pipe';
+import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
+import { PageComponent } from './components/page/page.component';
 
 const routes: Routes = [
   {
-    path: 'cards',
-    component: CardsComponent,
+    path: '',
+    component: PageComponent,
   }
 ]
 
 @NgModule({
   declarations: [
-    CardsComponent,
-    HeaderComponent,
-    MainComponent,
-    FooterComponent,
-    CardComponent,
+    PageComponent,
     //shared pipes
-    EnumToArrayPipe
+    EnumToArrayPipe,
   ],
   imports: [
     CommonModule,
@@ -37,4 +34,4 @@ const routes: Routes = [
   ]
 })
 
-export class CardsModule { }
+export class CoreModule { }
