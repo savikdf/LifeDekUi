@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+//shared
+import { SharedPipesModule } from '../shared/shared.pipes.module';
 //components
 import { CardsComponent } from 'src/app/cards/components/cards/cards.component';
 import { HeaderComponent } from 'src/app/cards/components/header/header.component';
@@ -9,7 +11,7 @@ import { FooterComponent } from 'src/app/cards/components/footer/footer.componen
 import { CardComponent } from 'src/app/cards/components/card/card.component';
 //services
 import { CardsService } from 'src/app/cards/services/cards.service';
-import { EnumToArrayPipe } from '../shared/pipes/enumToArray.pipe';
+
 
 const routes: Routes = [
   {
@@ -25,12 +27,11 @@ const routes: Routes = [
     MainComponent,
     FooterComponent,
     CardComponent,
-    //shared pipes
-    EnumToArrayPipe
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedPipesModule
   ],
   providers:[
     CardsService
