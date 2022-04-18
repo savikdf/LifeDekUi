@@ -1,0 +1,22 @@
+<nav>
+  <ul class="nav-list">
+    <li>
+      <a
+        href="/"
+        [ngClass]="{selected : (activeFilter$ | async) === PageEnum.home}"
+        (click)="changePage($event, PageEnum.home)"
+      >
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        href="/"
+        [ngClass]="{selected : (activeFilter$ | async) === PageEnum.cards}"
+        (click)="changePage($event, PageEnum.cards)"
+      >
+        Cards
+      </a>
+    </li>
+  </ul>
+</nav>

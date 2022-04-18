@@ -1,0 +1,17 @@
+footer{
+  display: block;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+footer > p,
+footer > p > a {
+  text-decoration: none;
+  color: lightgrey;
+}
+
+footer > p > a:hover {
+  text-decoration: underline;
+  color: grey;
+}

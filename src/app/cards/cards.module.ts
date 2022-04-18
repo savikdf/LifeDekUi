@@ -33,6 +33,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedPipesModule
   ],
+  exports:[
+    CardsComponent
+  ],
   providers:[
     CardsService
   ]

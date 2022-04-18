@@ -1,10 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 // import { CardInterface } from '../types/card.interface';
-// import { FilterEnum } from '../types/filter.enum';
+ import { PageEnum } from '../types/page.enum';
 
 @Injectable()
-export class CoreService {}
+export class CoreService {
+  page$ = new BehaviorSubject<PageEnum>(PageEnum.home);
+
+  constructor(){
+
+  }
+
+  changePage(page : PageEnum) : void{
+    if(page === this.page$.value){
+      return
+    }
+    this.page$.next(page);
+    console.debug(`Page changed to ${page}`);
+  }
+
+}
 
 // {
 //   cards$ = new BehaviorSubject<CardInterface[]>([]);
